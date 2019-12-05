@@ -17,6 +17,20 @@ int left_plate=9,right_plate=12;
 3:plate
 4:bomb
 */
+void SetColor(int color = 7)
+{
+  HANDLE hConsole;
+  hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+  SetConsoleTextAttribute(hConsole,color);
+}
+void gotoxy(int xpos, int ypos)
+{
+  COORD scrn;
+  HANDLE hOuput = GetStdHandle(STD_OUTPUT_HANDLE);
+  scrn.X = xpos; scrn.Y = ypos;
+  SetConsoleCursorPosition(hOuput,scrn);
+}
+
 void setup(){
     for(int i=0;i<row_number;++i){
         for(int j=0;j<col_number;++j){
@@ -32,7 +46,42 @@ void setup(){
     wall[23][12]=3;
 }
 
+void draw(){
+    gotoxy(0,0);
+    for(int i=0;i<row_number;++i){
+        for(int j=0;j<col_number;++j){
+            if(wall[i][j]==0){
+                cout<<"  ";
+            }
+            else if(wall[i][j]==1){
+                SetColor(12);
+                cout<<"* ";
+            }
+            else if(wall[i][j]==2){
+                SetColor(7);
+                cout<<"--";
+            }
+            else if(wall[i][j]==3){
+                SetColor(14);
+                cout<<"+ ";
+            }
+            else if(wall[i][j]==4){
+                SetColor(46);
+                cout<<"+ ";
+            }
+        }
+    }
+}
+
 int main(){
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO CursorInfo;
+    GetConsoleCursorInfo(handle, &CursorInfo);
+    CursorInfo.bVisible = false;
+    SetConsoleCursorInfo(handle, &CursorInfo);
+    //移除游標
+
+
     system("pause");
     return 0;
 }
