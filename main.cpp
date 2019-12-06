@@ -111,6 +111,9 @@ void draw(){
     }
 }
 void adjustpos(){
+    y_pos=(left_plate+right_plate-1)/2;
+    moved[0]=-1;
+    moved[1]=1;
     draw();
     char dir;
     while(1){
@@ -136,7 +139,7 @@ void moving(){
         if(y_pos<=1){
             moved[1]=1;
         }
-        else if(y_pos>=row_number-2){
+        else if(y_pos>=col_number-2){
             moved[1]=-1;
         }
 
@@ -149,6 +152,10 @@ void moving(){
         score+=1;
         moved[0]*=-1;
         wall[x_pos+moved[0]][y_pos+moved[1]]=0;
+    }
+    if(wall[x_pos+moved[0]][y_pos+moved[1]]==3){
+
+        adjustpos();
     }
     if(wall[x_pos+moved[0]][y_pos+moved[1]]==4){
         for(int i=x_pos+moved[0]-1;i<=x_pos+moved[0]+1;++i){
@@ -169,6 +176,31 @@ void moving(){
     x_pos+=moved[0];
     y_pos+=moved[1];
 }
+void game(){
+    char dir;
+    while(1){
+        if(kbhit()){
+            dir=getch();
+            if(dir=='z'){
+                break;
+            }
+            else if(dir=='a'&&left_plate>=2){
+                move_plate(-1);
+            }
+            else if(dir=='d'&&right_plate<=row_number-2){
+                move_plate(1);
+            }
+        }
+        if(checkBlockTooMuch()){
+            break;
+        }
+        moving();
+        draw();
+        Sleep(20);
+        continue;
+    }
+}
+
 void ending(){
     system("cls");
     SetColor(10);
@@ -185,6 +217,7 @@ int main(){
     draw();
     
     adjustpos();
+    game();
     ending();
     system("pause");
     return 0;
