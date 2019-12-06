@@ -100,7 +100,27 @@ void draw(){
         }
     }
 }
-
+void adjustpos(){
+    draw();
+    char dir;
+    while(1){
+        if(kbhit()){
+            dir=getch();
+            if(dir=='w'){
+                break;
+            }
+            else if(dir=='a'&&left_plate>1){
+                y_pos-=1;
+                move_plate(-1);
+            }
+            else if(dir=='d'&&right_plate<row_number){
+                y_pos+=1;
+                move_plate(1);
+            }
+            draw();
+        }
+    }
+}
 int main(){
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO CursorInfo;
@@ -110,7 +130,8 @@ int main(){
     //移除游標
     setup();
     draw();
-
+    
+    adjustpos()
 
     system("pause");
     return 0;
