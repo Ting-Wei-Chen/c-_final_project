@@ -157,7 +157,7 @@ void moving(){
                     score+=1;
                     wall[i][j]=0;
                 }
-                else if(wal[i][j]==4){
+                else if(wall[i][j]==4){
                     score+=2;
                     wall[i][j]=0;
                 }
