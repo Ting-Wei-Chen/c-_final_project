@@ -45,6 +45,20 @@ void setup(){
     wall[23][11]=3;
     wall[23][12]=3;
 }
+void move_plate(dir){
+    if(dir==1){
+        wall[23][left_plate]=0;
+        left_plate+=1;
+        right_plate+=1;
+        wall[23][right_plate]=3;
+    }
+    else id(dir==-1){
+        left_plate-=1;
+        wall[23][left_plate]=3;
+        wall[23][right_plate]=0;
+        right_plate-=1;
+    }
+}
 
 void draw(){
     gotoxy(0,0);
@@ -69,6 +83,10 @@ void draw(){
                 SetColor(46);
                 cout<<"+ ";
             }
+            else if(i==x_pos&&j==y_pos){
+                SetColor(11);
+                cout<<"@ ";
+            }
         }
     }
 }
@@ -80,6 +98,8 @@ int main(){
     CursorInfo.bVisible = false;
     SetConsoleCursorInfo(handle, &CursorInfo);
     //移除游標
+    setup();
+    draw();
 
 
     system("pause");
