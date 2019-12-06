@@ -123,6 +123,12 @@ void adjustpos(){
         }
     }
 }
+
+void ending(){
+    system("cls");
+    SetColor(10);
+    cout<<"game over"<<endl;;
+}
 int main(){
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO CursorInfo;
@@ -134,7 +140,7 @@ int main(){
     draw();
     
     adjustpos();
-
+    ending();
     system("pause");
     return 0;
 }
