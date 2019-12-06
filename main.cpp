@@ -75,30 +75,31 @@ void draw(){
     gotoxy(0,0);
     for(int i=0;i<row_number;++i){
         for(int j=0;j<col_number;++j){
-            if(wall[i][j]==0){
-                cout<<"  ";
-            }
-            else if(wall[i][j]==1){
+            if(wall[i][j]==1){
                 SetColor(12);
                 cout<<"* ";
             }
             else if(wall[i][j]==2){
                 SetColor(7);
-                cout<<"--";
+                cout<<"+ ";
             }
             else if(wall[i][j]==3){
                 SetColor(14);
-                cout<<"+ ";
+                cout<<"--";
             }
             else if(wall[i][j]==4){
                 SetColor(46);
                 cout<<"+ ";
             }
             else if(i==x_pos&&j==y_pos){
-                SetColor(11);
+                SetColor(7);
                 cout<<"@ ";
             }
+            else{
+                cout<<"  ";
+            }
         }
+        cout<<endl;
     }
 }
 void adjustpos(){
