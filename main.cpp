@@ -2,6 +2,7 @@
 #include<windows.h>
 #include<conio.h>
 
+using namespace std;
 const int row_number=28;
 const int col_number=21;
 
@@ -14,12 +15,12 @@ int wall[row_number][col_number]={
     {1,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,1},
     {1,0,0,0,2,2,2,2,0,0,0,2,2,2,2,0,0,0,0,0,1},
     {1,0,0,0,0,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,1}
-}
+};
 
 int score=0,level=1;
 int x_pos=22,y_pos=10;
 int left_plate=9,right_plate=12;
-int moved[2]=[-1,1];
+int moved[2]={-1,1};
 /*
 0:nothing
 1:wall
@@ -55,14 +56,14 @@ void setup(){
     wall[23][11]=3;
     wall[23][12]=3;
 }
-void move_plate(dir){
+void move_plate(int dir){
     if(dir==1){
         wall[23][left_plate]=0;
         left_plate+=1;
         right_plate+=1;
         wall[23][right_plate]=3;
     }
-    else id(dir==-1){
+    else if(dir==-1){
         left_plate-=1;
         wall[23][left_plate]=3;
         wall[23][right_plate]=0;
@@ -131,7 +132,7 @@ int main(){
     setup();
     draw();
     
-    adjustpos()
+    adjustpos();
 
     system("pause");
     return 0;
