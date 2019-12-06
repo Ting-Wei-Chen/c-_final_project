@@ -131,7 +131,44 @@ void adjustpos(){
         }
     }
 }
+void moving(){
+    if(wall[x_pos+moved[0]][y_pos+moved[1]]==1){
+        if(y_pos<=1){
+            moved[1]=1;
+        }
+        else if(y_pos>=row_number-2){
+            moved[1]=-1;
+        }
 
+        if(x_pos<=1){
+            moved[0]=1;
+        }
+    }
+
+    if(wall[x_pos+moved[0]][y_pos+moved[1]]==2){
+        score+=1;
+        moved[0]*=-1;
+        wall[x_pos+moved[0]][y_pos+moved[1]]=0;
+    }
+    if(wall[x_pos+moved[0]][y_pos+moved[1]]==4){
+        for(int i=x_pos+moved[0]-1;i<=x_pos+moved[0]+1;++i){
+            for(int j=y_pos+moved[1]-1;j<y_pos+moved[1]+1;++j){
+                if(wall[i][j]==2){
+                    score+=1;
+                    wall[i][j]=0;
+                }
+                else if(wal[i][j]==4){
+                    score+=2;
+                    wall[i][j]=0;
+                }
+            }
+        }
+        moved[0]*=-1;
+    }
+
+    x_pos+=moved[0];
+    y_pos+=moved[1];
+}
 void ending(){
     system("cls");
     SetColor(10);
