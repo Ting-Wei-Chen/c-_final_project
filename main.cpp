@@ -70,9 +70,17 @@ void move_plate(int dir){
         right_plate-=1;
     }
 }
-
+bool checkBlockTooMuch(){
+    for(int i=1;i<row_number-1;++i){
+        if(wall[21][i]==2||wall[21][i]==4){
+            return 1;
+        }
+    }
+    return 0;
+}
 void draw(){
     gotoxy(0,0);
+    cout<<"score:"<<score<<"\t"<<"level"<<level<<endl;
     for(int i=0;i<row_number;++i){
         for(int j=0;j<col_number;++j){
             if(wall[i][j]==1){
