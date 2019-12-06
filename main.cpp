@@ -19,6 +19,7 @@ int wall[row_number][col_number]={
 int score=0,level=1;
 int x_pos=22,y_pos=10;
 int left_plate=9,right_plate=12;
+int moved[2]=[-1,1];
 /*
 0:nothing
 1:wall
