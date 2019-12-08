@@ -16,7 +16,9 @@ int wall[row_number][col_number]={
     {1,0,0,0,2,2,2,2,0,4,0,2,2,2,2,0,0,0,0,0,1},
     {1,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,1},
     {1,0,0,0,2,2,2,2,0,0,0,2,2,2,2,0,0,0,0,0,1},
-    {1,0,0,0,0,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,1}
+    {1,0,0,0,0,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,2,2,2,4,2,2,2,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,1}
 };
 
 int score=0,level=1,ball_num=3;
@@ -83,7 +85,7 @@ bool checkBlockTooMuch(){
 void draw(){
     gotoxy(0,0);
     SetColor(15);
-    cout<<"ball:"<<ball_num<<"\t"<<"score:"<<score<<"\t"<<"level"<<level<<endl;
+    cout<<"ball:"<<ball_num<<"\t"<<"score:"<<score<<"\t"<<"level:"<<level<<endl;
     for(int i=0;i<row_number;++i){
         for(int j=0;j<col_number;++j){
             if(wall[i][j]==1){
