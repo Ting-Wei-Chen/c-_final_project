@@ -1,6 +1,8 @@
 #include<iostream>
 #include<windows.h>
 #include<conio.h>
+#include<time.h>
+#include<stdlib.h>
 
 using namespace std;
 const int row_number=28;
@@ -176,6 +178,19 @@ void moving(){
     x_pos+=moved[0];
     y_pos+=moved[1];
 }
+void addOneRow(){
+    for(int i=row_number-3;i>=1;--i){
+        for(int j=1;j<col_number-1;++j){
+            wall[i][j]=wall[i+1][j];
+        }
+    }
+    for(int i=1;i<col_number-1;++i){
+        wall[1][i]=1;
+    }
+
+    wall[1][rand()%(row_number-2)+1]=0;
+    wall[1][rand()%(row_number-2)+1]=4;
+}
 void game(){
     char dir;
     while(1){
@@ -206,6 +221,8 @@ void game(){
 
     if(score>=35+level*15){
         level+=1;
+        addOneRow();
+        ball_num+=1;
         adjustpos();
         game();
     }
