@@ -9,15 +9,15 @@ const int col_number=21;
 int wall[row_number][col_number]={
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,2,2,2,0,2,0,2,2,2,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,1},
     {1,0,0,0,2,2,2,2,0,4,0,2,2,2,2,0,0,0,0,0,1},
     {1,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,1},
     {1,0,0,0,2,2,2,2,0,0,0,2,2,2,2,0,0,0,0,0,1},
     {1,0,0,0,0,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,1}
 };
 
-int score=0,level=1;
+int score=0,level=1,ball_num=3;
 int x_pos=22,y_pos=10;
 int left_plate=9,right_plate=12;
 int moved[2]={-1,1};
@@ -80,7 +80,7 @@ bool checkBlockTooMuch(){
 }
 void draw(){
     gotoxy(0,0);
-    cout<<"score:"<<score<<"\t"<<"level"<<level<<endl;
+    cout<<"ball:"<<ball_num<<"\t"<<"score:"<<score<<"\t"<<"level"<<level<<endl;
     for(int i=0;i<row_number;++i){
         for(int j=0;j<col_number;++j){
             if(wall[i][j]==1){
@@ -111,6 +111,7 @@ void draw(){
     }
 }
 void adjustpos(){
+    x_pos=22;
     y_pos=(left_plate+right_plate-1)/2;
     moved[0]=-1;
     moved[1]=1;
@@ -136,25 +137,24 @@ void adjustpos(){
 }
 void moving(){
     if(wall[x_pos+moved[0]][y_pos+moved[1]]==1){
-        if(y_pos<=1){
+        if(y_pos<=2){
             moved[1]=1;
         }
         else if(y_pos>=col_number-2){
             moved[1]=-1;
         }
 
-        if(x_pos<=1){
+        if(x_pos<=2){
             moved[0]=1;
         }
     }
 
     if(wall[x_pos+moved[0]][y_pos+moved[1]]==2){
         score+=1;
-        moved[0]*=-1;
         wall[x_pos+moved[0]][y_pos+moved[1]]=0;
+        moved[0]*=-1;
     }
     if(wall[x_pos+moved[0]][y_pos+moved[1]]==3){
-
         adjustpos();
     }
     if(wall[x_pos+moved[0]][y_pos+moved[1]]==4){
@@ -194,10 +194,24 @@ void game(){
         if(checkBlockTooMuch()){
             break;
         }
+        if(x_pos==row_number-2){
+            ball_num-=1;
+            break;
+        }
         moving();
         draw();
         Sleep(20);
         continue;
+    }
+
+    if(score>=35+level*15){
+        level+=1;
+        adjustpos();
+        game();
+    }
+    else if(ball_num>=1){
+        adjustpos();
+        game();
     }
 }
 
