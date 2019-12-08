@@ -82,6 +82,7 @@ bool checkBlockTooMuch(){
 }
 void draw(){
     gotoxy(0,0);
+    SetColor(15);
     cout<<"ball:"<<ball_num<<"\t"<<"score:"<<score<<"\t"<<"level"<<level<<endl;
     for(int i=0;i<row_number;++i){
         for(int j=0;j<col_number;++j){
