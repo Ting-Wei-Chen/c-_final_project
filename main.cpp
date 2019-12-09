@@ -19,12 +19,13 @@ int wall[row_number][col_number]={
     {1,0,0,0,0,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,2,2,2,4,2,2,2,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,1}
-};
+};//初始化block 位置
 
 int score=0,level=1,ball_num=3;
 int x_pos=22,y_pos=10;
 int left_plate=9,right_plate=12;
 int moved[2]={-1,1};
+//基本資訊
 /*
 0:nothing
 1:wall
@@ -38,6 +39,7 @@ void SetColor(int color = 7)
   hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
   SetConsoleTextAttribute(hConsole,color);
 }
+//改變字顏色
 void gotoxy(int xpos, int ypos)
 {
   COORD scrn;
@@ -45,7 +47,7 @@ void gotoxy(int xpos, int ypos)
   scrn.X = xpos; scrn.Y = ypos;
   SetConsoleCursorPosition(hOuput,scrn);
 }
-
+//清屏函數
 void setup(){
     for(int i=0;i<row_number;++i){
         for(int j=0;j<col_number;++j){
@@ -60,6 +62,7 @@ void setup(){
     wall[23][11]=3;
     wall[23][12]=3;
 }
+//建立基本資訊
 void move_plate(int dir){
     if(dir==1){
         wall[23][left_plate]=0;
@@ -74,6 +77,7 @@ void move_plate(int dir){
         right_plate-=1;
     }
 }
+//移動plate
 bool checkBlockTooMuch(){
     for(int i=1;i<row_number-1;++i){
         if(wall[21][i]==2||wall[21][i]==4){
@@ -82,6 +86,7 @@ bool checkBlockTooMuch(){
     }
     return 0;
 }
+//確認blocks 是否到plate正上方
 void draw(){
     gotoxy(0,0);
     SetColor(15);
@@ -115,6 +120,7 @@ void draw(){
         cout<<endl;
     }
 }
+//根據地圖畫畫面函數
 void adjustpos(){
     x_pos=22;
     y_pos=(left_plate+right_plate-1)/2;
@@ -140,6 +146,7 @@ void adjustpos(){
         }
     }
 }
+//調整plate發射位置
 void moving(){
     if(wall[x_pos+moved[0]][y_pos+moved[1]]==1){
         if(y_pos<=2){
@@ -181,6 +188,7 @@ void moving(){
     x_pos+=moved[0];
     y_pos+=moved[1];
 }
+//移動plate
 void addOneRow(){
     for(int i=row_number-3;i>=1;--i){
         for(int j=1;j<col_number-1;++j){
@@ -194,6 +202,7 @@ void addOneRow(){
     wall[1][rand()%(row_number-2)+1]=0;
     wall[1][rand()%(row_number-2)+1]=4;
 }
+//level+1時，從最上方新增一列block
 void game(){
     char dir;
     while(1){
@@ -234,12 +243,13 @@ void game(){
         game();
     }
 }
-
+//遊戲進行(球移動)
 void ending(){
     system("cls");
     SetColor(10);
     cout<<"game over"<<endl;;
 }
+//畫結束畫面
 int main(){
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO CursorInfo;
