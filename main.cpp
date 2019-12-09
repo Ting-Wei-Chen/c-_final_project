@@ -89,23 +89,23 @@ void draw(){
     for(int i=0;i<row_number;++i){
         for(int j=0;j<col_number;++j){
             if(wall[i][j]==1){
-                SetColor(12);
+                SetColor(2);
                 cout<<"* ";
             }
             else if(wall[i][j]==2){
-                SetColor(7);
+                SetColor(11);
                 cout<<"+ ";
             }
             else if(wall[i][j]==3){
-                SetColor(14);
+                SetColor(6);
                 cout<<"--";
             }
             else if(wall[i][j]==4){
-                SetColor(46);
+                SetColor(27);
                 cout<<"+ ";
             }
             else if(i==x_pos&&j==y_pos){
-                SetColor(7);
+                SetColor(12);
                 cout<<"@ ";
             }
             else{
@@ -218,7 +218,7 @@ void game(){
         }
         moving();
         draw();
-        Sleep(20);
+        Sleep(10);
         continue;
     }
 
