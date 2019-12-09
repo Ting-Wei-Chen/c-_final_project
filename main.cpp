@@ -114,6 +114,7 @@ void draw(){
                 cout<<"@ ";
             }
             else{
+                SetColor();
                 cout<<"  ";
             }
         }
@@ -190,13 +191,13 @@ void moving(){
 }
 //移動plate
 void addOneRow(){
-    for(int i=row_number-3;i>=1;--i){
+    for(int i=1;i<=21;++i){
         for(int j=1;j<col_number-1;++j){
             wall[i][j]=wall[i+1][j];
         }
     }
     for(int i=1;i<col_number-1;++i){
-        wall[1][i]=1;
+        wall[1][i]=2;
     }
 
     wall[1][rand()%(row_number-2)+1]=0;
@@ -214,7 +215,7 @@ void game(){
             else if(dir=='a'&&left_plate>=2){
                 move_plate(-1);
             }
-            else if(dir=='d'&&right_plate<=col_number-2){
+            else if(dir=='d'&&right_plate<col_number-2){
                 move_plate(1);
             }
         }
@@ -225,20 +226,19 @@ void game(){
             ball_num-=1;
             break;
         }
+        if(score>=level*15+20){
+            level+=1;
+            addOneRow();
+            ball_num+=1;
+            adjustpos();
+        }
         moving();
         draw();
-        Sleep(10);
         continue;
     }
 
-    if(score>=35+level*15){
-        level+=1;
-        addOneRow();
-        ball_num+=1;
-        adjustpos();
-        game();
-    }
-    else if(ball_num>=1){
+    
+    if(ball_num>=1){
         adjustpos();
         game();
     }
