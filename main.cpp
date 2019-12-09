@@ -132,7 +132,7 @@ void adjustpos(){
                 y_pos-=1;
                 move_plate(-1);
             }
-            else if(dir=='d'&&right_plate<row_number){
+            else if(dir=='d'&&right_plate<col_number-2){
                 y_pos+=1;
                 move_plate(1);
             }
@@ -205,7 +205,7 @@ void game(){
             else if(dir=='a'&&left_plate>=2){
                 move_plate(-1);
             }
-            else if(dir=='d'&&right_plate<=row_number-2){
+            else if(dir=='d'&&right_plate<=col_number-2){
                 move_plate(1);
             }
         }
