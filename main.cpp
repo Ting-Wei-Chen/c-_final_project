@@ -8,7 +8,7 @@ using namespace std;
 const int row_number=28;
 const int col_number=21;
 
-int wall[row_number][col_number]={
+int initial[row_number][col_number]={
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -19,7 +19,8 @@ int wall[row_number][col_number]={
     {1,0,0,0,0,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,2,2,2,4,2,2,2,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,1}
-};//初始化block 位置
+};//初始化block 位置;
+int wall[row_number][col_number];
 
 int score=0,level=1,ball_num=3;
 int x_pos=22,y_pos=10;
@@ -49,6 +50,18 @@ void gotoxy(int xpos, int ypos)
 }
 //清屏函數
 void setup(){
+    for(int i=0;i<row_number;++i){
+        for(int j=0;j<col_number;++j){
+            wall[i][j]=initial[i][j];
+        }
+    }
+
+    score=0,level=1,ball_num=3;
+    x_pos=22,y_pos=10;
+    left_plate=9,right_plate=12;
+    moved[0]=-1;
+    moved[1]=1;
+
     for(int i=0;i<row_number;++i){
         for(int j=0;j<col_number;++j){
             if(i==0||j==0||i==row_number-1||j==col_number-1){
@@ -247,7 +260,8 @@ void game(){
 void ending(){
     system("cls");
     SetColor(10);
-    cout<<"game over"<<endl;;
+    cout<<"game over"<<endl;
+    cout<<"press z to restart";
 }
 //畫結束畫面
 int main(){
@@ -257,12 +271,22 @@ int main(){
     CursorInfo.bVisible = false;
     SetConsoleCursorInfo(handle, &CursorInfo);
     //移除游標
-    setup();
-    draw();
+    while(1){
+        setup();
+        draw();
+        
+        adjustpos();
+        game();
+        ending();
+        char re;
+        re=getch();
+        if(re=='z'){
+            continue;
+        }
+
+        break;
+    }
     
-    adjustpos();
-    game();
-    ending();
     system("pause");
     return 0;
 }
