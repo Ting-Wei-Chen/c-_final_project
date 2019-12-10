@@ -222,7 +222,7 @@ void game(){
     while(1){
         if(kbhit()){
             dir=getch();
-            if(dir=='z'){
+            if(dir=='z'&&moved[0]==-1){
                 break;
             }
             else if(dir=='a'&&left_plate>=2){
