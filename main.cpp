@@ -281,6 +281,7 @@ int main(){
         char re;
         re=getch();
         if(re=='z'){
+            system("cls");
             continue;
         }
 
